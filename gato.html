@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imagen Capturada</title>
+</head>
+<body>
+
+<h1>Imagen Capturada</h1>
+<img id="captured-img" src="" alt="Imagen Capturada">
+
+<script>
+// Obtener la imagen capturada del almacenamiento local
+const capturedImg = document.getElementById('captured-img');
+const imgData = localStorage.getItem('capturedImage');
+if (imgData) {
+  capturedImg.src = imgData;
+} else {
+  capturedImg.style.display = 'none';
+}
+</script>
+
+</body>
+</html>

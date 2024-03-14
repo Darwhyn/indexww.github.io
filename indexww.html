@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomar Foto y Redirigir</title>
+</head>
+<body>
+
+<div id="camera">
+  <video id="video" width="400" height="300" autoplay></video>
+  <button id="capture-btn">Tomar Foto</button>
+</div>
+
+<script>
+// Acceder al video y al botón de captura
+const video = document.getElementById('video');
+const captureBtn = document.getElementById('capture-btn');
+
+// Obtener la cámara del usuario
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(function(stream) {
+    video.srcObject = stream;
+  })
+  .catch(function(err) {
+    console.error('Error al acceder a la cámara', err);
+  });
+
+// Función para capturar la foto
+captureBtn.addEventListener('click', function() {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Convertir la imagen a Base64
+  const imgData = canvas.toDataURL('image/png');
+
+  // Guardar la imagen en el almacenamiento local
+  localStorage.setItem('capturedImage', imgData);
+
+  // Redirigir a otra página
+  window.location.href = 'gato.html';
+});
+</script>
+
+</body>
+</html>
